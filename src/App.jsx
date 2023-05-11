@@ -1,11 +1,15 @@
+import TypingBox from "./components/typingBox"
 import { GlobalStyles } from "./styles/global"
 
 
 function App() {
   return <div className='App'>
     <GlobalStyles/>
-    <p className="para">Funny</p>
-    Hello
+    <div className="header">Header</div>
+    <div className="main">
+      <TypingBox/>
+    </div>
+    <div className="footer">Footer</div>
   </div>
 }
 
