@@ -14,3 +14,10 @@
     <li>generating random words and displaying them</li>
     <li>creating a hidden input box which is focussed by default</li>
 </ol>
+
+### step-3 - correct or incorrect words
+<ol>
+    <li>referencing each and every word</li>
+    <li>implementing blinking cursor</li>
+    <li>comparing characters to check correct or incorrect</li>
+</ol>

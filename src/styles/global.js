@@ -31,5 +31,22 @@ body{
 .hidden-input{
     opacity:0;
 }
+.current{
+    border-left: 1px solid;
+    animation: blink 2s ease infinite;
+    @keyframes blink{
+        0% {border-left-color: white;}
+        25% {border-left-color: black;}
+        50% {border-left-color: white;}
+        75% {border-left-color: black;}
+        100% {border-left-color: white;}
+    }
+}
+.correct{
+    color:green;
+}
+.incorrect{
+    color:red;
+}
 `
 
