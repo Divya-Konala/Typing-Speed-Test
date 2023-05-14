@@ -21,3 +21,16 @@
     <li>implementing blinking cursor</li>
     <li>comparing characters to check correct or incorrect</li>
 </ol>
+
+### step-4 - correct and incorrect throught paragraph
+<ol>
+    <li>replicate the process of correct and incorrect throughout the paragraph</li>
+</ol>
+
+### step-5 - backspace and extra characters
+<ol>
+    <li>handling the extra characters typed</li>
+    <li>implementing backspace functionality</li>
+</ol>
+
+### step-6 - implementing timer functionality and useOf useContext
