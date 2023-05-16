@@ -5,8 +5,8 @@ body{
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
-    background-color: black;
-    color: white;
+    background-color: ${({ theme }) => theme.background};
+    color: ${({ theme }) => theme.color};
     transform: all 0.2s linear;
 }
 .App{
@@ -28,6 +28,7 @@ body{
     flex-wrap:wrap;
     gap:1rem;
     font-size:30px;
+    color: ${({ theme }) => theme.textBoxColor};
 }
 .hidden-input{
     opacity:0;
@@ -36,26 +37,26 @@ body{
     border-left: 1px solid;
     animation: blink 2s ease infinite;
     @keyframes blink{
-        0% {border-left-color: white;}
-        25% {border-left-color: black;}
-        50% {border-left-color: white;}
-        75% {border-left-color: black;}
-        100% {border-left-color: white;}
+        0% {border-left-color: ${({ theme }) => theme.background}}
+        25% {border-left-color: ${({ theme }) => theme.color}}
+        50% {border-left-color: ${({ theme }) => theme.background}}
+        75% {border-left-color: ${({ theme }) => theme.color}}
+        100% {border-left-color: ${({ theme }) => theme.background}}
     }
 }
 .current-right{
     border-right: 1px solid;
     animation: blink-right 2s ease infinite;
     @keyframes blink-right{
-        0% {border-right-color:white}
-        25% {border-right-color:black}
-        50% {border-right-color:white}
-        75% {border-right-color:black}
-        100% {border-right-color:white}
+        0% {border-left-color: ${({ theme }) => theme.background}}
+        25% {border-left-color: ${({ theme }) => theme.color}}
+        50% {border-left-color: ${({ theme }) => theme.background}}
+        75% {border-left-color: ${({ theme }) => theme.color}}
+        100% {border-left-color: ${({ theme }) => theme.background}}
     }
 }
 .correct{
-    color:green;
+    color:${({ theme }) => theme.color};
 }
 .incorrect{
     color:red;
@@ -74,5 +75,29 @@ body{
 }
 .counter-mode: hover{
     cursor: pointer;
+}
+.footer{
+    display: flex;
+    justify-content: space-between;
+    width: 1000px;
+}
+.select-theme{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+.css-1dimb5e-singleValue{
+    color: ${({theme})=>theme.color};
+    width: 200px;
+}
+.css-1xc3v61-indicatorContainer{
+    color: ${({theme})=>theme.color};
+}
+.footer .links{
+    display: flex;
+    gap:1.5rem;
+}
+.footer .links a{
+    color: ${({theme})=>theme.color}
 }
 `;

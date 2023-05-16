@@ -34,3 +34,5 @@
 </ol>
 
 ### step-6 - implementing timer functionality and useOf useContext
+
+### step-7 - implementing themes 

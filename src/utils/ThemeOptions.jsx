@@ -1,0 +1,114 @@
+const darkTheme={
+    label: "dark",
+    background:"black",
+    color:"white",
+    textBoxColor:"grey"
+}
+
+const lightTheme={
+    label: "light",
+    background: "white",
+    color: "black",
+    textBoxColor: "grey"
+}
+
+const aurora={
+    label: "Aurora",
+    background: "#011926",
+    color: "#00e57e",
+    textBoxColor:"#245c69"
+}
+
+const blueDolphin={
+    label: "Blue Dolphin",
+    background:"#003950",
+    color:"#f8f8f8",
+    textBoxColor:"#00cde5"
+}
+
+const blueberryLight={
+    label: "Blueberry Light",
+    background:"#f8f8f8",
+    color:"#506477",
+    textBoxColor:"#8393ab"
+}
+
+const botanical={
+    label:"Botanical",
+    background:"#7b9c98",
+    color:"#f8f8f8",
+    textBoxColor:"#455351"
+}
+
+const blackBoard={
+    label:"Black Board",
+    background:"#173f35",
+    color:"#f8f8f8",
+    textBoxColor:"#408e7b"
+}
+
+const breeze={
+    label:"Breeze",
+    background: "#e8d5c4",
+    color:"#7d67a9",
+    textBoxColor:"#3a98b9"
+}
+
+const bushido={
+    label:"Bushido",
+    background:"#242933",
+    color:"#ec4c56",
+    textBoxColor:"#3486a3"
+}
+
+const coffee={
+    label:"Coffee",
+    background:"#ceb28f",
+    color:"#14120f",
+    textBoxColor:"#f8f8f8"
+}
+
+const camping={
+    label:"Camping",
+    background:"#faf1e4",
+    color:"#618c56",
+    textBoxColor:"#bebdbc"
+}
+
+const voc={
+    label: "VOC",
+    background: "#190618",
+    color: "#e7e2dd",
+    textBoxColor:"#4c1e48"
+}
+
+const lavender={
+    label: "Lavender",
+    background: "#b3baff",
+    color: "#130f1a",
+    textBoxColor: "#a3a7df"
+}
+
+const hammerHead={
+    label: "Hammer Head",
+    background: "#030613",
+    color: "#f8f8f8",
+    textBoxColor:"#0a1928"
+}
+
+export const ThemeOptions=[
+    {label: 'Dark', value: darkTheme},
+    {label: 'Light', value: lightTheme},
+    {label: 'Aurora', value: aurora},
+    {label: 'Blue Dolphin', value: blueDolphin},
+    {label: 'Blueberry Light', value: blueberryLight},
+    {label: 'Botanical', value: botanical},
+    {label: 'Black Board', value: blackBoard},
+    {label: 'Breeze', value: breeze},
+    {label: 'Bushido', value: bushido},
+    {label: 'Coffee', value: coffee},
+    {label: 'Camping', value: camping},
+    {label: 'VOC', value: voc},
+    {label: 'Lavender', value: lavender},
+    {label: 'Hammer Head', value: hammerHead},
+]

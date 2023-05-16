@@ -1,5 +1,5 @@
 import randomWords from "random-words";
-import { createRef, useEffect, useRef, useState } from "react";
+import { createRef, useEffect, useMemo, useRef, useState } from "react";
 import UpperMenu from "./UpperMenu";
 import { useTestMode } from "../context/TestModeContext";
 
@@ -11,14 +11,37 @@ const TypingBox = () => {
   const [testStart, setTestStart] = useState(false);
   const [testEnd, setTestEnd] = useState(false);
 
+  const [countDownSelected, setCountDownSelected] = useState(countDown);
+
   const inputRef = useRef(null);
 
-  let wordsRef = Array(words.length)
-    .fill(0)
-    .map((i) => createRef(null));
+  let wordsRef = useMemo(() => {
+    return Array(words.length)
+      .fill(0)
+      .map((i) => createRef(null));
+  }, [words]);
 
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const [currentCharIndex, setCurrentCharIndex] = useState(0);
+
+  const [correctChars, setCorrectChars] = useState(0);
+  const [incorrectChars, setIncorrectChars] = useState(0);
+  const [missedChars, setMissedChars] = useState(0);
+  const [extraChars, setExtraChars] = useState(0);
+  const [correctWords, setCorrectWords] = useState(0);
+
+  const calculateparams = () => {
+    console.log(correctChars);
+    console.log(incorrectChars);
+    console.log(missedChars);
+    console.log(correctWords);
+    console.log(currentWordIndex);
+  };
+
+  const calculateWPM = () =>
+    Math.round(correctChars / 5 / (countDownSelected / 60));
+
+  const calculateAccuracy = () => Math.round((correctWords/currentWordIndex+1))
 
   const startTimer = () => {
     intervalId = setInterval(() => {
@@ -43,6 +66,14 @@ const TypingBox = () => {
 
     //backspace functionality
     if (e.keyCode === 8) {
+      let currentWord=currwordChars[currentCharIndex-1];
+      if(currentWord!=undefined){
+        if (currentWord.classList.contains("correct")) setCorrectChars(correctChars-1);
+      else if (currentWord.classList.contains("extra")) setExtraChars(extraChars-1);
+      else if (currentWord.classList.contains("incorrect")) setIncorrectChars(incorrectChars-1);
+      else setMissedChars(missedChars-1);
+      }
+
       //for going to prev word
       if (currentCharIndex === 0) {
         if (currentWordIndex === 0) return; //handling first word first character
@@ -62,6 +93,13 @@ const TypingBox = () => {
       }
       //if the cursor is at the end of current word
       else if (currwordChars.length === currentCharIndex) {
+        // if (currwordChars[currentCharIndex - 1].classList.contains(""))
+        if (
+          wordsRef[currentWordIndex].current.querySelectorAll("correct")
+            .length === currwordChars.length
+        ) {
+          setCorrectWords(correctWords - 1);
+        }
         currwordChars[currentCharIndex - 1].className = "current";
         setCurrentCharIndex(currentCharIndex - 1);
       } else {
@@ -72,32 +110,43 @@ const TypingBox = () => {
       return;
     }
 
+    //clicking space leads to next word
+    if (e.keyCode == 32) {
+      setCurrentWordIndex(currentWordIndex + 1);
+      setCurrentCharIndex(0);
+      wordsRef[currentWordIndex + 1].current.childNodes[0].className =
+        "current";
+      if (currwordChars.length === currentCharIndex) {
+        let correctCharsInWord =
+          wordsRef[currentWordIndex].current.querySelectorAll(".correct");
+        if (correctCharsInWord.length === currwordChars.length)
+          setCorrectWords(correctWords + 1);
+        currwordChars[currentCharIndex - 1].classList.remove("current-right");
+      } else {
+        currwordChars[currentCharIndex].classList.remove("current");
+        setMissedChars(missedChars + currwordChars.length - currentCharIndex);
+      }
+      return;
+    }
+
     //if typing exceeds word length
     if (currwordChars.length === currentCharIndex) {
-      //space after completing word
-      if (e.keyCode == 32) {
-        if (currentWordIndex === words.length - 1) return; //handling last word last character
-        setCurrentWordIndex(currentWordIndex + 1);
-        setCurrentCharIndex(0);
-        wordsRef[currentWordIndex + 1].current.childNodes[0].className =
-          "current";
-      }
-      //other than space, incorrect characters typed
-      else {
-        let newSpan = document.createElement("span");
-        newSpan.innerText = e.key;
-        newSpan.className = "incorrect extra current-right";
-        wordsRef[currentWordIndex].current.append(newSpan);
-        setCurrentCharIndex(currentCharIndex + 1);
-      }
+      setExtraChars(extraChars + 1);
+      let newSpan = document.createElement("span");
+      newSpan.innerText = e.key;
+      newSpan.className = "incorrect extra current-right";
+      wordsRef[currentWordIndex].current.append(newSpan);
+      setCurrentCharIndex(currentCharIndex + 1);
       currwordChars[currentCharIndex - 1].classList.remove("current-right");
       return;
     }
 
     if (currwordChars[currentCharIndex].innerText === e.key) {
       currwordChars[currentCharIndex].className = "correct";
+      setCorrectChars(correctChars + 1);
     } else {
       currwordChars[currentCharIndex].className = "incorrect";
+      setIncorrectChars(incorrectChars + 1);
     }
     if (currwordChars.length === currentCharIndex + 1) {
       currwordChars[currentCharIndex].className += " current-right";
@@ -125,15 +174,20 @@ const TypingBox = () => {
   };
 
   const handleChangeMode = (e) => {
-    clearInterval(intervalId);
+    setCountDown(Number(e.target.id));
+    setCountDownSelected(Number(e.target.id));
     setCurrentWordIndex(0);
     setCurrentCharIndex(0);
-    setCountDown(Number(e.target.id));
-    setWords(randomWords(50));
     setTestStart(false);
     setTestEnd(false);
+    setWords(randomWords(50));
+    focusInput();
+    clearInterval(intervalId);
     resetWordsRefClassNames();
   };
+  useEffect(() => {
+    if (testEnd) calculateparams();
+  }, [testEnd]);
 
   useEffect(() => {
     focusInput();
@@ -141,11 +195,13 @@ const TypingBox = () => {
   }, []);
   return (
     <div className="typingBox" onClick={focusInput}>
-      <UpperMenu handleChangeMode={handleChangeMode} />
       {testEnd ? (
-        <h1>TEST OVER</h1>
+        <>
+          <h1>TEST OVER</h1>
+        </>
       ) : (
-        <div className="textBox">
+        <>
+          <UpperMenu handleChangeMode={handleChangeMode} />
           <div className="words">
             {words.map((word, index) => {
               return (
@@ -165,7 +221,7 @@ const TypingBox = () => {
             onKeyDown={handleInput}
             ref={inputRef}
           />
-        </div>
+        </>
       )}
     </div>
   );
