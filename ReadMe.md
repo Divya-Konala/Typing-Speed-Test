@@ -7,6 +7,7 @@
     <li>styled-components</li>
     <li>Material-UI</li>
     <li>Material Icons</li>
+    <li>react-select</li>
 </ol>
 
 ### step 2 - creating typing box component
@@ -36,3 +37,25 @@
 ### step-6 - implementing timer functionality and useOf useContext
 
 ### step-7 - implementing themes 
+
+### step-8 - Generating Test Results and Graph
+
+### step-9 - header component
+<ol>
+    <li>Logo</li>
+    <li>Account
+        <ol>
+            <li>Login Form</li>
+            <li>Signup Form</li>
+        </ol>
+    </li>
+</ol>
+
+### step-10 - Firebase Setup
+<ol>
+    <li>create new project</li>
+    <li>select web application</li>
+    <li>copy config and paste inside firebaseConfig</li>
+    <li>Go to authentication - enable email and google authentications</li>
+    <li>create firestore database in test mode(test mode is preferred for build mode)</li>
+</ol>

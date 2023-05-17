@@ -2,6 +2,7 @@ import randomWords from "random-words";
 import { createRef, useEffect, useMemo, useRef, useState } from "react";
 import UpperMenu from "./UpperMenu";
 import { useTestMode } from "../context/TestModeContext";
+import Stats from "./Stats";
 
 let intervalId = null;
 const TypingBox = () => {
@@ -30,18 +31,25 @@ const TypingBox = () => {
   const [extraChars, setExtraChars] = useState(0);
   const [correctWords, setCorrectWords] = useState(0);
 
+  const [wpmData, setWpmData] = useState([]);
+  const [accuracyData, setAccuracyData] = useState([]);
+
   const calculateparams = () => {
     console.log(correctChars);
     console.log(incorrectChars);
     console.log(missedChars);
     console.log(correctWords);
     console.log(currentWordIndex);
+    console.log(wpmData);
+    console.log(accuracyData);
+    // console.log(prevCorrectChars);
   };
 
   const calculateWPM = () =>
     Math.round(correctChars / 5 / (countDownSelected / 60));
 
-  const calculateAccuracy = () => Math.round((correctWords/currentWordIndex+1))
+  const calculateAccuracy = () =>
+    Math.round((correctWords / (currentWordIndex + 1)) * 100);
 
   const startTimer = () => {
     intervalId = setInterval(() => {
@@ -51,6 +59,35 @@ const TypingBox = () => {
           setTestEnd(true);
           return 0;
         }
+        setCorrectChars((correctChars) => {
+            setWpmData((wpmData) => {
+              return [
+                ...wpmData,
+                [
+                  countDownSelected - prev + 1,
+                  Math.round(
+                    (correctChars/ 5) / ((countDownSelected - prev + 1) / 60)
+                  ),
+                ],
+              ];
+            });
+          return correctChars;
+        });
+        setCurrentWordIndex((currentWordIndex) => {
+          setCorrectWords((correctWords) => {
+            setAccuracyData((accuracyData) => {
+              return [
+                ...accuracyData,
+                [
+                  countDownSelected - prev + 1,
+                  Math.round((correctWords / (currentWordIndex + 1)) * 100),
+                ],
+              ];
+            });
+            return correctWords;
+          });
+          return currentWordIndex;
+        });
         return prev - 1;
       });
     }, 1000);
@@ -66,12 +103,15 @@ const TypingBox = () => {
 
     //backspace functionality
     if (e.keyCode === 8) {
-      let currentWord=currwordChars[currentCharIndex-1];
-      if(currentWord!=undefined){
-        if (currentWord.classList.contains("correct")) setCorrectChars(correctChars-1);
-      else if (currentWord.classList.contains("extra")) setExtraChars(extraChars-1);
-      else if (currentWord.classList.contains("incorrect")) setIncorrectChars(incorrectChars-1);
-      else setMissedChars(missedChars-1);
+      let currentWord = currwordChars[currentCharIndex - 1];
+      if (currentWord != undefined) {
+        if (currentWord.classList.contains("correct"))
+          setCorrectChars(correctChars - 1);
+        else if (currentWord.classList.contains("extra"))
+          setExtraChars(extraChars - 1);
+        else if (currentWord.classList.contains("incorrect"))
+          setIncorrectChars(incorrectChars - 1);
+        else setMissedChars(missedChars - 1);
       }
 
       //for going to prev word
@@ -196,9 +236,16 @@ const TypingBox = () => {
   return (
     <div className="typingBox" onClick={focusInput}>
       {testEnd ? (
-        <>
-          <h1>TEST OVER</h1>
-        </>
+        <Stats
+          wpm={calculateWPM()}
+          accuracy={calculateAccuracy()}
+          correctChars={correctChars}
+          incorrectChars={incorrectChars}
+          missedChars={missedChars}
+          extraChars={extraChars}
+          wpmData={wpmData}
+          accuracyData={accuracyData}
+        />
       ) : (
         <>
           <UpperMenu handleChangeMode={handleChangeMode} />

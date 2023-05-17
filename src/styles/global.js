@@ -19,6 +19,27 @@ body{
     align-items: center;
     text-align: center;
 }
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 1000px;
+}
+.logo{
+    display: flex;
+    align-items: center;
+    gap:2rem;
+    font-size: 2rem;
+}
+.MuiTabs-indicator{
+    background-color: ${({theme})=>theme.color}
+}
+.MuiFormLabel-root{
+    color: ${({theme})=>theme.color}
+}
+fieldset, fieldset legend, legend span{
+    border-color: ${({theme})=>theme.color}!important;
+}
 .typingBox{
     max-width:1000px;
     min-width:320px;
@@ -98,6 +119,31 @@ body{
     gap:1.5rem;
 }
 .footer .links a{
+    color: ${({theme})=>theme.textBoxColor}
+}
+.Stats{
+    width: 1000px;
+    display: flex;
+    align-items: center;
+}
+.left-stats{
+    width: 30%;
+    padding: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap:0.4rem;
+}
+.left-stats .title{
+    font-size: 1.2rem;
+    color: ${({theme})=>theme.textBoxColor};
+    font-weight: 600;
+}
+.left-stats .sub-title{
+    font-size: 1.8rem;
     color: ${({theme})=>theme.color}
+}
+.right-stats{
+    width: 70%;
+    padding: 0.5rem;
 }
 `;

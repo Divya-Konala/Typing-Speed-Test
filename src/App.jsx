@@ -3,14 +3,15 @@ import Footer from "./components/Footer";
 import TypingBox from "./components/typingBox";
 import { GlobalStyles } from "./styles/global";
 import { useTheme } from "./context/ThemeContext";
+import Header from "./components/Header";
 
 function App() {
-  const {theme}=useTheme();
+  const { theme } = useTheme();
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
         <GlobalStyles />
-        <div className="header">Header</div>
+        <Header />
         <div className="main">
           <TypingBox />
         </div>
