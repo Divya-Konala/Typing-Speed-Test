@@ -8,6 +8,10 @@
     <li>Material-UI</li>
     <li>Material Icons</li>
     <li>react-select</li>
+    <li>react-toastify</li>
+    <li>google-react-button</li>
+    <li>react-router-dom</li>
+    <li>react-firebase-hooks</li>
 </ol>
 
 ### step 2 - creating typing box component
@@ -59,3 +63,18 @@
     <li>Go to authentication - enable email and google authentications</li>
     <li>create firestore database in test mode(test mode is preferred for build mode)</li>
 </ol>
+
+### step-11 - Firebase authentication
+<ol>
+    <li>createUserWithEmailAndPassword</li>
+    <li>signInWithEmailAndPassword</li>
+    <li>signInWithGoogle</li>
+    <li>signOut</li>
+<ol>
+
+### step-12 - save test results to firestore
+
+### step-13 - routing - homepage & userpage
+
+### step-14 - fetching all the test-results of user from firebase and representing them in the form of table and graph if the user is logged in.
+

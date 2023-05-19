@@ -8,11 +8,11 @@ let intervalId = null;
 const TypingBox = () => {
   const [words, setWords] = useState(() => randomWords(50));
 
-  const { countDown, setCountDown } = useTestMode();
+  const { timer, setTimer } = useTestMode();
   const [testStart, setTestStart] = useState(false);
   const [testEnd, setTestEnd] = useState(false);
 
-  const [countDownSelected, setCountDownSelected] = useState(countDown);
+  const [countDown, setCountDown] = useState(timer);
 
   const inputRef = useRef(null);
 
@@ -34,22 +34,11 @@ const TypingBox = () => {
   const [wpmData, setWpmData] = useState([]);
   const [accuracyData, setAccuracyData] = useState([]);
 
-  const calculateparams = () => {
-    console.log(correctChars);
-    console.log(incorrectChars);
-    console.log(missedChars);
-    console.log(correctWords);
-    console.log(currentWordIndex);
-    console.log(wpmData);
-    console.log(accuracyData);
-    // console.log(prevCorrectChars);
-  };
-
   const calculateWPM = () =>
-    Math.round(correctChars / 5 / (countDownSelected / 60));
+    Math.round(correctChars / 5 / (timer / 60));
 
   const calculateAccuracy = () =>
-    Math.round((correctWords / (currentWordIndex + 1)) * 100);
+    Math.round((correctWords / currentWordIndex ) * 100);
 
   const startTimer = () => {
     intervalId = setInterval(() => {
@@ -64,9 +53,9 @@ const TypingBox = () => {
               return [
                 ...wpmData,
                 [
-                  countDownSelected - prev + 1,
+                  timer - prev + 1,
                   Math.round(
-                    (correctChars/ 5) / ((countDownSelected - prev + 1) / 60)
+                    (correctChars/ 5) / ((timer - prev + 1) / 60)
                   ),
                 ],
               ];
@@ -79,7 +68,7 @@ const TypingBox = () => {
               return [
                 ...accuracyData,
                 [
-                  countDownSelected - prev + 1,
+                  timer - prev + 1,
                   Math.round((correctWords / (currentWordIndex + 1)) * 100),
                 ],
               ];
@@ -215,7 +204,7 @@ const TypingBox = () => {
 
   const handleChangeMode = (e) => {
     setCountDown(Number(e.target.id));
-    setCountDownSelected(Number(e.target.id));
+    setTimer(Number(e.target.id));
     setCurrentWordIndex(0);
     setCurrentCharIndex(0);
     setTestStart(false);
@@ -225,14 +214,12 @@ const TypingBox = () => {
     clearInterval(intervalId);
     resetWordsRefClassNames();
   };
-  useEffect(() => {
-    if (testEnd) calculateparams();
-  }, [testEnd]);
 
   useEffect(() => {
     focusInput();
     wordsRef[0].current.childNodes[0].className = "current";
   }, []);
+  
   return (
     <div className="typingBox" onClick={focusInput}>
       {testEnd ? (
@@ -248,7 +235,7 @@ const TypingBox = () => {
         />
       ) : (
         <>
-          <UpperMenu handleChangeMode={handleChangeMode} />
+          <UpperMenu handleChangeMode={handleChangeMode} countDown={countDown} />
           <div className="words">
             {words.map((word, index) => {
               return (

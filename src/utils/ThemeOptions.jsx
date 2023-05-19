@@ -7,9 +7,9 @@ const darkTheme={
 
 const lightTheme={
     label: "light",
-    background: "white",
+    background: "#f8f8f8",
     color: "black",
-    textBoxColor: "grey"
+    textBoxColor: "#506477"
 }
 
 const aurora={
@@ -26,12 +26,7 @@ const blueDolphin={
     textBoxColor:"#00cde5"
 }
 
-const blueberryLight={
-    label: "Blueberry Light",
-    background:"#f8f8f8",
-    color:"#506477",
-    textBoxColor:"#8393ab"
-}
+
 
 const botanical={
     label:"Botanical",
@@ -45,20 +40,6 @@ const blackBoard={
     background:"#173f35",
     color:"#f8f8f8",
     textBoxColor:"#408e7b"
-}
-
-const breeze={
-    label:"Breeze",
-    background: "#e8d5c4",
-    color:"#7d67a9",
-    textBoxColor:"#3a98b9"
-}
-
-const bushido={
-    label:"Bushido",
-    background:"#242933",
-    color:"#ec4c56",
-    textBoxColor:"#3486a3"
 }
 
 const coffee={
@@ -86,14 +67,42 @@ const lavender={
     label: "Lavender",
     background: "#b3baff",
     color: "#130f1a",
-    textBoxColor: "#a3a7df"
+    textBoxColor: "gray"
 }
 
 const hammerHead={
     label: "Hammer Head",
     background: "#030613",
     color: "#f8f8f8",
-    textBoxColor:"#0a1928"
+    textBoxColor:"#13304c"
+}
+
+const mudPot={
+    label: "Mud Pot",
+    background: "#643843",
+    color: "white",
+    textBoxColor: "#C88EA7"
+}
+
+const cherryBlossom={
+    label: "Cherry Blossom",
+    background: "#D4ADFC",
+    color: "#0C134F",
+    textBoxColor: "#5C469C"
+}
+
+const breeze={
+    label: "Breeze",
+    background: "#EBD8B2",
+    color: "#654E92",
+    textBoxColor:"#6C9BCF"
+}
+
+const lemon={
+    label: "Lemon",
+    background: "#FFF7D4",
+    color: "#4C3D3D",
+    textBoxColor: "#C07F00"
 }
 
 export const ThemeOptions=[
@@ -101,14 +110,15 @@ export const ThemeOptions=[
     {label: 'Light', value: lightTheme},
     {label: 'Aurora', value: aurora},
     {label: 'Blue Dolphin', value: blueDolphin},
-    {label: 'Blueberry Light', value: blueberryLight},
     {label: 'Botanical', value: botanical},
     {label: 'Black Board', value: blackBoard},
-    {label: 'Breeze', value: breeze},
-    {label: 'Bushido', value: bushido},
     {label: 'Coffee', value: coffee},
     {label: 'Camping', value: camping},
     {label: 'VOC', value: voc},
     {label: 'Lavender', value: lavender},
     {label: 'Hammer Head', value: hammerHead},
+    {label: 'Mud Pot', value: mudPot},
+    {label: 'Cherry Blossom', value: cherryBlossom},
+    {label: 'Breeze', value: breeze},
+    {label: 'Lemon', value: lemon}
 ]
