@@ -54,8 +54,7 @@ fieldset{
     border-color: ${({theme})=>theme.textBoxColor}!important;
 }
 .typingBox{
-    max-width:1000px;
-    min-width:320px;
+    width:1000px;
 }
 .words{
     display: flex;

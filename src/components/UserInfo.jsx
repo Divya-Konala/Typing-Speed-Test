@@ -11,8 +11,7 @@ const UserInfo = ({totalTestsTaken}) => {
     const formattedDate = dateObj.toLocaleDateString("en-US", options);
     return formattedDate;
   };
-
-  console.log(user);
+  
   return (
     <div className="user">
       <div className="user-info">
