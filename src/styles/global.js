@@ -23,11 +23,12 @@ body{
     display: grid;
     grid-template-row: auto 1fr auto;
     gap: 2rem;
-    height: 100vh;
+    height: fit-content;
     width: 100vw;
     justify-content:center;
     align-items: center;
     text-align: center;
+    margin: 2rem auto 4rem;
 }
 .header{
     display: flex;
@@ -167,13 +168,12 @@ fieldset{
 .user{
     width: 1000px;
     box-sizing: border-box;
-    background-color: ${({theme})=>theme.background};
-    margin-top: 2rem;
+    background-color: ${({theme})=>theme.color};
+    color: ${({theme})=>theme.background};
     padding: 2rem 1rem;
     display: flex;
     align-items: center;
-    border: 1px solid ${({theme})=>theme.textBoxColor};
-    border-radius: 10px;
+    border-radius: 5px;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 .user-info{
