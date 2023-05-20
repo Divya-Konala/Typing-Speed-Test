@@ -1,3 +1,14 @@
+# Typing Playground
+
+## Features:
+<ul>
+    <li>implementing a multi-mode typing test website with the ability to save results for better analysis</li>
+    <li>used firebase to login/signup and also used a database to save results</li>
+    <li>used various react hooks and context API to implement major functionalities like themes and test modes</li>
+    <li>Tools & Technologies - React, Material UI, Firebase, Styled Components</li>
+</ul>
+
+
 ### step 1 - dependencies used :
 <ol>
     <li>firebase</li>
@@ -70,11 +81,11 @@
     <li>signInWithEmailAndPassword</li>
     <li>signInWithGoogle</li>
     <li>signOut</li>
-<ol>
+</ol>
 
 ### step-12 - save test results to firestore
 
 ### step-13 - routing - homepage & userpage
 
-### step-14 - fetching all the test-results of user from firebase and representing them in the form of table and graph if the user is logged in.
+### step-14 - fetching all the test-results of user from firestore and representing them in the form of table and graph if the user is logged in.
 
