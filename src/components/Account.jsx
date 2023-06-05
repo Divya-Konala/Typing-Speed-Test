@@ -88,7 +88,6 @@ const Account = () => {
           <AppBar
             style={{
               position: "static",
-              width: "500px",
               background: theme.background,
               textAlign: "center",
             }}

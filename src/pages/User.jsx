@@ -68,7 +68,7 @@ const User = () => {
     );
   return (
     <div className="user-canvas">
-      <UserInfo totalTestsTaken={data.length} />
+      <UserInfo totalTestsTaken={data.length}/>
       {data.length === 0 ? (
         ""
       ) : (

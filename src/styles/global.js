@@ -48,6 +48,9 @@ body{
     justify-conter: center;
     gap: 1rem;
 }
+.MuiAppBar-root{
+    width: 500px;
+}
 .MuiTabs-indicator{
     background-color: ${({theme})=>theme.textBoxColor}
 }
@@ -132,10 +135,22 @@ fieldset{
     gap:1.5rem;
 }
 .footer .links a{
-    color: ${({theme})=>theme.textBoxColor}
+    color: ${({theme})=>theme.textBoxColor};
 }
 .Stats{
     width: 1000px;
+}
+.Stats button{
+    background-color: ${({theme})=>theme.textBoxColor};
+    color: ${({theme})=>theme.color};
+    font-weight: 700;
+    border: none;
+    padding: 10px 20px;
+}
+.Stats button:hover{
+    cursor:pointer;
+}
+.Statistics-box{
     display: flex;
     align-items: center;
 }
@@ -204,4 +219,85 @@ fieldset{
     justify-content: center;
     align-items: center;
 }
+
+
+@media screen and (max-width:1024px){
+    .header, .footer, .typingBox{
+        width: 90vw;
+    }
+    .Stats{
+        width: 100%;
+        margin: auto;
+    }
+    .right-stats{
+        width: 100%;
+    }
+    .graph canvas{
+        margin: auto;
+    }
+    .Statistics-box{
+        flex-direction: column;
+        gap: 20px;
+    }
+    .user, .userTable, .user-graph{
+        width: 90%;
+        margin: auto;
+    }
+    .user-graph .graph canvas{
+        width: 100%!important;
+        height: auto!important;
+    }
+}
+@media screen and (max-width:700px){
+    .graph canvas{
+        width: 100%!important;
+        height: auto!important;
+    }
+    .left-stats .title{
+        font-size: 0.8rem;
+    }
+    .left-stats .sub-title{
+        font-size: 1rem;
+    }
+    .user{
+        flex-direction: column;
+    }
+    .user-info{
+        border-right: none;
+        border-bottom: 2px solid;
+        padding-bottom: 20px;
+        margin-bottom: 20px;
+        width: 100%;
+    }
+    .test-details{
+        width: 100%;
+    }
+}
+@media screen and (max-width: 600px){
+    .footer{
+        flex-direction: column;
+        gap: 20px;
+        align-items: center;
+    }
+    .words{
+        font-size: 25px;
+    }
+}
+@media screen and (max-width: 500px){
+    .user-info{
+        flex-direction: column;
+        gap: 20px;
+    }
+    .user{
+        padding: 50px 10px;
+    }
+    .userTable{
+        display: none;
+    }
+    .MuiAppBar-root{
+        width: 300px;
+    }
+}
 `;
+
+

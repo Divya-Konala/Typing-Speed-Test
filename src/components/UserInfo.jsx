@@ -26,7 +26,7 @@ const UserInfo = ({totalTestsTaken}) => {
         </div>
       </div>
       <div className="test-details">
-        Total Tests Taken: <b>{totalTestsTaken}</b>
+        Total Tests Taken: <b>{totalTestsTaken}</b><br/>
       </div>
     </div>
   );

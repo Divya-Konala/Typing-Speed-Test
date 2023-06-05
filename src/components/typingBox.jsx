@@ -34,11 +34,10 @@ const TypingBox = () => {
   const [wpmData, setWpmData] = useState([]);
   const [accuracyData, setAccuracyData] = useState([]);
 
-  const calculateWPM = () =>
-    Math.round(correctChars / 5 / (timer / 60));
+  const calculateWPM = () => Math.round(correctChars / 5 / (timer / 60));
 
   const calculateAccuracy = () =>
-    Math.round((correctWords / currentWordIndex ) * 100);
+    Math.round((correctWords / currentWordIndex) * 100);
 
   const startTimer = () => {
     intervalId = setInterval(() => {
@@ -49,17 +48,15 @@ const TypingBox = () => {
           return 0;
         }
         setCorrectChars((correctChars) => {
-            setWpmData((wpmData) => {
-              return [
-                ...wpmData,
-                [
-                  timer - prev + 1,
-                  Math.round(
-                    (correctChars/ 5) / ((timer - prev + 1) / 60)
-                  ),
-                ],
-              ];
-            });
+          setWpmData((wpmData) => {
+            return [
+              ...wpmData,
+              [
+                timer - prev + 1,
+                Math.round(correctChars / 5 / ((timer - prev + 1) / 60)),
+              ],
+            ];
+          });
           return correctChars;
         });
         setCurrentWordIndex((currentWordIndex) => {
@@ -171,10 +168,10 @@ const TypingBox = () => {
     }
 
     if (currwordChars[currentCharIndex].innerText === e.key) {
-      currwordChars[currentCharIndex].className = "correct";
+      currwordChars[currentCharIndex].className = " correct";
       setCorrectChars(correctChars + 1);
     } else {
-      currwordChars[currentCharIndex].className = "incorrect";
+      currwordChars[currentCharIndex].className = " incorrect";
       setIncorrectChars(incorrectChars + 1);
     }
     if (currwordChars.length === currentCharIndex + 1) {
@@ -186,7 +183,9 @@ const TypingBox = () => {
   };
 
   const focusInput = () => {
-    inputRef.current.focus();
+    if(inputRef.current!==null){
+      inputRef.current.focus();
+    }
   };
 
   const resetWordsRefClassNames = () => {
@@ -209,6 +208,12 @@ const TypingBox = () => {
     setCurrentCharIndex(0);
     setTestStart(false);
     setTestEnd(false);
+    setIncorrectChars(0);
+    setMissedChars(0);
+    setExtraChars(0);
+    setCorrectWords(0);
+    setWpmData([]);
+    setAccuracyData([]);
     setWords(randomWords(50));
     focusInput();
     clearInterval(intervalId);
@@ -219,11 +224,33 @@ const TypingBox = () => {
     focusInput();
     wordsRef[0].current.childNodes[0].className = "current";
   }, []);
-  
+
+  useEffect(() => {
+    if (!testEnd) {
+      setCurrentWordIndex(0);
+      setCurrentCharIndex(0);
+      setCorrectChars(0);
+      setIncorrectChars(0);
+      setMissedChars(0);
+      setExtraChars(0);
+      setCorrectWords(0);
+      setWpmData([]);
+      setAccuracyData([]);
+      setCountDown(timer);
+      setTestStart(false);
+      setWords(randomWords(50));
+      resetWordsRefClassNames();
+
+      focusInput();
+      wordsRef[0].current.childNodes[0].className = "current";
+    }
+  }, [testEnd]);
+
   return (
     <div className="typingBox" onClick={focusInput}>
       {testEnd ? (
         <Stats
+          setTestEnd={setTestEnd}
           wpm={calculateWPM()}
           accuracy={calculateAccuracy()}
           correctChars={correctChars}
@@ -235,7 +262,10 @@ const TypingBox = () => {
         />
       ) : (
         <>
-          <UpperMenu handleChangeMode={handleChangeMode} countDown={countDown} />
+          <UpperMenu
+            handleChangeMode={handleChangeMode}
+            countDown={countDown}
+          />
           <div className="words">
             {words.map((word, index) => {
               return (

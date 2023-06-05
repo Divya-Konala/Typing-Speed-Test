@@ -20,7 +20,7 @@ const UserTable = ({ data }) => {
             <TableRow>
               <TableCell style={tableHeaderStyle}>WPM</TableCell>
               <TableCell style={tableHeaderStyle}>Accuracy</TableCell>
-              <TableCell style={tableHeaderStyle}>Characters (correct/incorrect/missed/extra)</TableCell>
+              <TableCell style={tableHeaderStyle}>Characters</TableCell>
               <TableCell style={tableHeaderStyle}>TimeStamp</TableCell>
             </TableRow>
           </TableHead>

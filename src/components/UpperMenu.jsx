@@ -1,5 +1,3 @@
-import { useTestMode } from "../context/TestModeContext";
-
 const UpperMenu = ({ handleChangeMode, countDown }) => {
 
   return (
